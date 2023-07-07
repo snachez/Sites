@@ -6,7 +6,6 @@ CREATE   PROCEDURE SP_SelectArea (	  @ID						NVARCHAR(MAX)  =	NULL
 											, @ACTIVO					BIT			   =	NULL
 											, @PAGE						INT			   =	1
 											, @SIZE						INT			   =	10
-											--, @ORDER_BY					NVARCHAR(30)   =	NULL
 										)
 AS
 BEGIN
@@ -16,7 +15,6 @@ BEGIN
 	---
 	;WITH DATA_INDEXED AS (				SELECT     A.Id							AS [Id]
 												 , A.Nombre						AS [Nombre]
-												 --, A.Fk_Id_Departamento			AS [Fk_Id_Departamento]
 												 , A.Codigo						AS [Codigo]
 												 , A.Activo						AS [Activo]
 												 , A.FechaCreacion				AS [FechaCreacion]
@@ -45,12 +43,7 @@ BEGIN
 	SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] BETWEEN ((@PAGE * @SIZE)-(@SIZE-1)) AND (@PAGE * @SIZE)
 	---
 	DECLARE @JSON_RESULT NVARCHAR(MAX) = (SELECT * FROM #tmpTblDataResult 
-	--ORDER BY	CASE @ORDER_BY
-	--				WHEN 1 THEN Id
-	--				WHEN 2 THEN Activo
-	--				WHEN 3 THEN Nombre
-	--				WHEN 4 THEN [Departamento.Nombre]
-	--			END
+
 	FOR JSON PATH)
 	---
 	DROP TABLE #tmpTblDataResult

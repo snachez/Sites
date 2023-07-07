@@ -44,9 +44,7 @@ BEGIN
 															FOR JSON PATH)
 		---
 		DECLARE @RESULTADOS_INSERT NVARCHAR(MAX) = (	
-														SELECT		CGA.Id							 AS [Id]
-																	--, CGA.FkIdCuentaInterna			 AS [FkIdCuentaInterna]
-																	--, CGA.FkIdGrupoAgencias			 AS [FkIdGrupoAgencias]
+														SELECT		CGA.Id								 AS [FkIdGrupoAgencias]
 																	, CGA.Codigo					 AS [Codigo]
 																	, CGA.Activo					 AS [Activo]
 																	, CGA.FechaCreacion				 AS [FechaCreacion]
@@ -54,8 +52,7 @@ BEGIN
 
 																	, C.Id							 AS [CuentaInterna.Id]
 																	, C.NumeroCuenta				 AS [CuentaInterna.NumeroCuenta]
-																	, C.Codigo						 AS [CuentaInterna.Codigo]
-																	--, C.FkIdDivisa					 AS [CuentaInterna.FkIdDivisa]
+																	, C.Codigo							 AS [CuentaInterna.FkIdDivisa]
 																	, C.Activo						 AS [CuentaInterna.Activo]
 																	, C.FechaCreacion				 AS [CuentaInterna.FechaCreacion]
 																	, C.FechaModificacion			 AS [CuentaInterna.FechaModificacion]
@@ -92,8 +89,6 @@ BEGIN
 		DECLARE @ROW NVARCHAR(MAX) = (SELECT * FROM tblCuentaInterna_x_GrupoAgencias WHERE Id = ISNULL(SCOPE_IDENTITY(), -1) FOR JSON PATH)
 		---
 		DECLARE @ROWS_AFFECTED INT = (SELECT COUNT(*) FROM @OUT_NEW_IDs)
-		---
-		--DECLARE @NEW_IDs_JSON NVARCHAR(MAX) = (SELECT NEW_ID FROM @OUT_NEW_IDs FOR JSON PATH)
 		---
 		SELECT	  @ROWS_AFFECTED											AS ROWS_AFFECTED
 				, CAST(1 AS BIT)											AS SUCCESS

@@ -27,16 +27,6 @@ BEGIN
 				SET @RESULT = 1
 			END
 		--
-		--SET @RESULT = (	
-		--	SELECT Count(*) 
-		--	FROM tblTipoEfectivo TE
-		--	INNER JOIN tblUnidadMedida_x_TipoEfectivo UM ON UM.Fk_Id_Tipo_Efectivo = TE.Id	
-		--	LEFT JOIN tblDivisa_x_TipoEfectivo DxT ON DxT.FkIdTipoEfectivo = TE.Id	
-		--	LEFT JOIN tblDenominaciones D ON D.BMO = TE.Id
-		--	WHERE TE.Id = @ID
-		--	and 
-		--	(UM.Activo = 1 OR  DxT.Activo = 1 OR D.Activo = 1))
-		--
 	END
 	--
     RETURN(@RESULT)

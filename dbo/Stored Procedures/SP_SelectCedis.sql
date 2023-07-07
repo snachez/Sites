@@ -17,8 +17,9 @@ BEGIN
 	DECLARE @sql NVARCHAR(max);
 
 	--------------------------------- DATOS Y CANTIDAD DE DATA DE LA TABLA  ------------------------------------
-	SET @sql= '
+    SET @sql= '
     DECLARE @SEARCH NVARCHAR(MAX) = ''' + @SEARCH + ''';
+	DECLARE @CONCAT NVARCHAR(MAX) = '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
 
 	--------------------------------- CANTIDAD DE DATA DE LA TABLA  ------------------------------------
     SELECT COUNT(*)
@@ -29,11 +30,11 @@ BEGIN
 	C.Activo = (CASE 
             WHEN @SEARCH = ''Activo'' THEN 1
             WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-	OR C.Id_Cedis LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'	
-	OR C.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-	OR C.Codigo_Cedis LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'	
-	OR P.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-	OR P.Codigo LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
+	OR C.Id_Cedis LIKE @CONCAT	
+	OR C.Nombre LIKE @CONCAT
+	OR C.Codigo_Cedis LIKE @CONCAT	
+	OR P.Nombre LIKE @CONCAT
+	OR P.Codigo LIKE @CONCAT;
 
     --------------------------------- DATOS DE LA TABLA  ------------------------------------
     WITH DATA_INDEXED AS (SELECT  C.[Id_Cedis]
@@ -50,11 +51,11 @@ BEGIN
 						C.Activo = (CASE 
 									WHEN @SEARCH = ''Activo'' THEN 1
 									WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR C.Id_Cedis LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'	
-						OR C.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR C.Codigo_Cedis LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'	
-						OR P.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR P.Codigo LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+')
+						OR C.Id_Cedis LIKE @CONCAT	
+						OR C.Nombre LIKE @CONCAT
+						OR C.Codigo_Cedis LIKE @CONCAT	
+						OR P.Nombre LIKE @CONCAT
+						OR P.Codigo LIKE @CONCAT)
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 
 						BETWEEN '+ CONVERT(VARCHAR(12), (@PAGE) ) + ' AND ' + CONVERT(VARCHAR(12), ((@PAGE)+(@SIZE-1)))+ '
 										---

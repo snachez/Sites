@@ -1,0 +1,10 @@
+﻿
+CREATE   PROCEDURE SP_SelectDiasHabilesEntregaPedidosInternos
+AS
+BEGIN
+	---
+	DECLARE @JSON_RESULT NVARCHAR(MAX) = (SELECT * FROM tblDiasHabilesEntregaPedidosInternos FOR JSON PATH)
+	---
+	SELECT @JSON_RESULT AS JSON_RESULT_SELECT
+	---
+END

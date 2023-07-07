@@ -1,0 +1,8 @@
+﻿CREATE   FUNCTION [dbo].[FN_VALIDACION_CONTRAINT_tblTipoEfectivo](@Fk_Id_TipoEfectivo INT)
+RETURNS BIT
+AS
+BEGIN
+	--VALIDA SI EL TIPO EFECTIVO ESTA ACTIVO
+	RETURN (SELECT Activo FROM tblTipoEfectivo WHERE Id = @Fk_Id_TipoEfectivo)
+	--
+END

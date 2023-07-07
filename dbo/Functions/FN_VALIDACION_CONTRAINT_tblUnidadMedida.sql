@@ -1,0 +1,8 @@
+﻿CREATE   FUNCTION [dbo].[FN_VALIDACION_CONTRAINT_tblUnidadMedida](@Fk_Id_UnidadMedida INT)
+RETURNS BIT
+AS
+BEGIN
+	--VALIDA SI LA DENOMINACION ESTA ACTIVA
+	RETURN (SELECT Activo FROM tblUnidadMedida WHERE Id = @Fk_Id_UnidadMedida)
+	--
+END

@@ -68,7 +68,6 @@ BEGIN
 						WHERE ID = @i
 
 								SET @p_Aux_Activo = NULL	
-						        --SELECT @p_Aux_Activo = (SELECT A.Activo FROM tblDepartamento D INNER JOIN tblArea A ON A.Fk_Id_Departamento = D.Id WHERE D.Id = @p_Id_Departamento_Cursor AND A.Activo = 1)
 
 				   				IF(@p_Aux_Activo is null)
 								BEGIN

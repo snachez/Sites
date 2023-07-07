@@ -19,6 +19,8 @@ BEGIN
 	---
 	SET @sql= '
 	DECLARE @SEARCH NVARCHAR(MAX) = ''' + @SEARCH + ''';
+	DECLARE @CONCAT NVARCHAR(MAX) = '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
+
     WITH DATA_INDEXED AS (SELECT  *
 								 , ROW_NUMBER() OVER(ORDER BY '+ @ORDEN + ') AS [INDEX]
 						FROM [tblPais]	
@@ -26,9 +28,9 @@ BEGIN
 						Activo = (CASE 
                                   WHEN @SEARCH  = ''Activo'' THEN 1
                                   WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'						
-						OR Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR Codigo LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+')
+						OR Id LIKE @CONCAT						
+						OR Nombre LIKE @CONCAT
+						OR Codigo LIKE @CONCAT)
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 
 						BETWEEN '+ CONVERT(VARCHAR(12), (@PAGE) ) + ' AND ' + CONVERT(VARCHAR(12), ((@PAGE)+(@SIZE-1)))+ '
 										---

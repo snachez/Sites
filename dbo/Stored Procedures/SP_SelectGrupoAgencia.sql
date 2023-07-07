@@ -19,6 +19,7 @@ BEGIN
 	--------------------------------- DATOS Y CANTIDAD DE DATA DE LA TABLA  ------------------------------------
 	SET @sql= '
     DECLARE @SEARCH NVARCHAR(MAX) = ''' + @SEARCH + ''';
+	DECLARE @CONCAT NVARCHAR(MAX) = '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
 
 	--------------------------------- CANTIDAD DE DATA DE LA TABLA  ------------------------------------
     SELECT SUM(TotalGruposAgencias)
@@ -35,8 +36,8 @@ BEGIN
 						G.Activo = (CASE 
                                     WHEN @SEARCH = ''Activo'' THEN 1
                                     WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR G.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR G.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
+						OR G.Id LIKE @CONCAT
+						OR G.Nombre LIKE @CONCAT
     ) AS Subconsulta;
 
     --------------------------------- DATOS DE LA TABLA  ------------------------------------
@@ -92,8 +93,8 @@ BEGIN
 		 G.Activo = (CASE 
                      WHEN @SEARCH = ''Activo'' THEN 1
                      WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-				     OR G.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-					 OR G.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
+				     OR G.Id LIKE @CONCAT
+					 OR G.Nombre LIKE @CONCAT
     GROUP BY G.Activo, G.Id, G.Nombre, G.EnviaRemesas, G.SolicitaRemesas)
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 
 						BETWEEN '+ CONVERT(VARCHAR(12), (@PAGE) ) + ' AND ' + CONVERT(VARCHAR(12), ((@PAGE)+(@SIZE-1)))+ '

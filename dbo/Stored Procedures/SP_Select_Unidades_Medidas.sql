@@ -35,6 +35,8 @@ BEGIN
 	---
 	SET @sql= '
 	DECLARE @SEARCH NVARCHAR(MAX) = ''' + @SEARCH + ''';
+	DECLARE @CONCAT NVARCHAR(MAX) = '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
+
     WITH DATA_INDEXED AS (
 						SELECT  
 								  U.Id								AS	[Id]
@@ -53,12 +55,12 @@ BEGIN
 						U.Activo = (CASE 
                                   WHEN @SEARCH  = ''Activo'' THEN 1
                                   WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR U.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'	
-						OR U.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR U.Simbolo LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR U.Cantidad_Unidades LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR U.Divisa LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR U.Presentaciones_Habilitadas LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+')
+						OR U.Id LIKE @CONCAT	
+						OR U.Nombre LIKE @CONCAT
+						OR U.Simbolo LIKE @CONCAT
+						OR U.Cantidad_Unidades LIKE @CONCAT
+						OR U.Divisa LIKE @CONCAT
+						OR U.Presentaciones_Habilitadas LIKE @CONCAT)
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 
 						BETWEEN '+ CONVERT(VARCHAR(12), (@PAGE) ) + ' AND ' + CONVERT(VARCHAR(12), ((@PAGE)+(@SIZE-1)))+ '
 										---

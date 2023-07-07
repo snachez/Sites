@@ -19,6 +19,7 @@ BEGIN
 	--------------------------------- DATOS Y CANTIDAD DE DATA DE LA TABLA  ------------------------------------
 	SET @sql= '
     DECLARE @SEARCH NVARCHAR(MAX) = ''' + @SEARCH + ''';
+	DECLARE @CONCAT NVARCHAR(MAX) = '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
 
 	--------------------------------- CANTIDAD DE DATA DE LA TABLA  ------------------------------------
     SELECT SUM(TotalDenominaciones)
@@ -38,11 +39,11 @@ BEGIN
 						D.Activo = (CASE 
                                     WHEN @SEARCH = ''Activo'' THEN 1
                                     WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR D.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR D.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-					    OR D.ValorNominal LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR DI.Nomenclatura LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR TI.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
+						OR D.Id LIKE @CONCAT
+						OR D.Nombre LIKE @CONCAT
+					    OR D.ValorNominal LIKE @CONCAT
+						OR DI.Nomenclatura LIKE @CONCAT
+						OR TI.Nombre LIKE @CONCAT
 						GROUP BY D.Nombre
     ) AS Subconsulta;
 
@@ -90,11 +91,11 @@ BEGIN
 						D.Activo = (CASE 
                                     WHEN @SEARCH = ''Activo'' THEN 1
                                     WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR D.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR D.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-					    OR D.ValorNominal LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR DI.Nomenclatura LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR TI.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
+						OR D.Id LIKE @CONCAT
+						OR D.Nombre LIKE @CONCAT
+					    OR D.ValorNominal LIKE @CONCAT
+						OR DI.Nomenclatura LIKE @CONCAT
+						OR TI.Nombre LIKE @CONCAT
 						GROUP BY D.Nombre, D.Id, D.Activo, D.ValorNominal, 
 						D.IdDivisa, DI.Nomenclatura, TI.Nombre, D.BMO, D.Imagen )
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 

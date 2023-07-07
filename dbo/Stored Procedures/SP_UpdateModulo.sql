@@ -30,12 +30,6 @@ BEGIN
 		--
 		DECLARE @ERROR_MESSAGE NVARCHAR(MAX) = ERROR_MESSAGE()
 		--
-		--IF @ERROR_MESSAGE LIKE '%UNIQUE_NOMINAL_DIVISA_BMO%' BEGIN 
-		--	---
-		--	SET @ERROR_MESSAGE = 'La combinacion de Valor Nominal, el tipo de Divisa y la presentacion ya existen'
-		--	---
-	 --   END	
-		--
 		SELECT	  0															AS ROWS_AFFECTED
 		        , CAST(0 AS BIT)											AS SUCCESS
 				, @ERROR_MESSAGE											AS ERROR_MESSAGE_SP

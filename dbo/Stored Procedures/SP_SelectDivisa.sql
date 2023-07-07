@@ -19,6 +19,7 @@ BEGIN
 	--------------------------------- DATOS Y CANTIDAD DE DATA DE LA TABLA  ------------------------------------
 	SET @sql= '
     DECLARE @SEARCH NVARCHAR(MAX) = ''' + @SEARCH + ''';
+	DECLARE @CONCAT NVARCHAR(MAX) = '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+';
 
 	--------------------------------- CANTIDAD DE DATA DE LA TABLA  ------------------------------------
     SELECT SUM(TotalDivisas)
@@ -30,10 +31,10 @@ BEGIN
     WHERE D.Activo = (CASE 
             WHEN @SEARCH = ''Activo'' THEN 1
             WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-		  OR D.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-		  OR D.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-		  OR D.Nomenclatura LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-		  OR D.Descripcion LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
+		  OR D.Id LIKE @CONCAT
+		  OR D.Nombre LIKE @CONCAT
+		  OR D.Nomenclatura LIKE @CONCAT
+		  OR D.Descripcion LIKE @CONCAT
     GROUP BY d.Nombre
     ) AS Subconsulta;
 
@@ -73,10 +74,10 @@ BEGIN
 						D.Activo = (CASE 
                                     WHEN @SEARCH = ''Activo'' THEN 1
                                     WHEN @SEARCH = ''Inactivo'' THEN 0 END)
-						OR D.Id LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR D.Nombre LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-					    OR D.Nomenclatura LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
-						OR D.Descripcion LIKE '+CONCAT('''%',ISNULL(@SEARCH, ''),'%''')+'
+						OR D.Id LIKE @CONCAT
+						OR D.Nombre LIKE @CONCAT
+					    OR D.Nomenclatura LIKE @CONCAT
+						OR D.Descripcion LIKE @CONCAT
 						GROUP BY D.Nombre, D.Id, D.Activo, D.Nomenclatura, D.Descripcion, TE.Id )
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 
 						BETWEEN '+ CONVERT(VARCHAR(12), (@PAGE) ) + ' AND ' + CONVERT(VARCHAR(12), ((@PAGE)+(@SIZE-1)))+ '

@@ -4,9 +4,7 @@ Post-Deployment Script Template
  This file contains SQL statements that will be appended to the build script.		
  Use SQLCMD syntax to include a file in the post-deployment script.			
  Example:      :r .\myfile.sql								
- Use SQLCMD syntax to reference a variable in the post-deployment script.		
- Example:      :setvar TableName MyTable							
-               SELECT * FROM [$(TableName)]					
+ Use SQLCMD syntax to reference a variable in the post-deployment script.					
 --------------------------------------------------------------------------------------
 */
 Use [Sites.Global];
@@ -28,9 +26,9 @@ IF NOT EXISTS ( SELECT * FROM [dbo].[tblDivisa] where [Nombre] = 'Colón' OR [No
 BEGIN
 SET IDENTITY_INSERT [dbo].[tblDivisa] ON 
 
-INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (1, N'Colón', N'CRC', N'¢', N'Moneda De Costa Rica', 1, CAST(N'2023-01-24T10:16:00' AS SmallDateTime), NULL)
-INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (2, N'Dólar', N'USD', N'$', N'Moneda De Estados Unidos', 1, CAST(N'2023-01-24T10:16:00' AS SmallDateTime), NULL)
-INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (3, N'Euro', N'EUR', N'€', N'Moneda De La Union Europea', 1, CAST(N'2023-01-24T10:16:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (1, N'Colón', N'CRC', N'¢', N'Moneda De Costa Rica', 1, CAST(N'2023-02-24T10:16:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (2, N'Dólar', N'USD', N'$', N'Moneda De Estados Unidos', 1, CAST(N'2023-03-24T10:16:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (3, N'Euro', N'EUR', N'€', N'Moneda De La Union Europea', 1, CAST(N'2023-04-24T10:16:00' AS SmallDateTime), NULL)
 SET IDENTITY_INSERT [dbo].[tblDivisa] OFF
 END
 GO
@@ -57,7 +55,7 @@ IF NOT EXISTS ( SELECT * FROM [dbo].[tblProvincia] where [Id] = 1)
 BEGIN
 INSERT [dbo].[tblProvincia] ([Id], [Nombre], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (1, N'SAN JOSE', 1, CAST(N'2023-03-08T08:21:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblProvincia] ([Id], [Nombre], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (2, N'ALAJUELA', 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblProvincia] ([Id], [Nombre], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (2, N'ALAJUELA', 1, CAST(N'2022-03-08T08:22:00' AS SmallDateTime), NULL)
 
 INSERT [dbo].[tblProvincia] ([Id], [Nombre], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (3, N'CARTA', 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
 
@@ -91,91 +89,91 @@ INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCre
 
 INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (111, N'VAZQUEZ DE CORONADO', 1, 1, CAST(N'2023-03-08T08:21:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (112, N'ACOSTA', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (112, N'ACOSTA', 1, 1, CAST(N'2022-01-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (113, N'TIBAS', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (113, N'TIBAS', 1, 1, CAST(N'2020-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (114, N'MORAVIA', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (114, N'MORAVIA', 1, 1, CAST(N'2021-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (115, N'MONTES DE OCA', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (115, N'MONTES DE OCA', 1, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (116, N'TURRUBARES', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (116, N'TURRUBARES', 1, 1, CAST(N'2020-06-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (117, N'DOTA', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (117, N'DOTA', 1, 1, CAST(N'2014-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (118, N'CURRIDABAT', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (118, N'CURRIDABAT', 1, 1, CAST(N'2011-01-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (119, N'PEREZ ZELEDON', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (119, N'PEREZ ZELEDON', 1, 1, CAST(N'2013-03-09T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (120, N'LEON CORTES', 1, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (120, N'LEON CORTES', 1, 1, CAST(N'2013-03-08T10:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (201, N'ALAJUELA', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (201, N'ALAJUELA', 2, 1, CAST(N'2013-03-08T08:12:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (202, N'SAN RAMON', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (202, N'SAN RAMON', 2, 1, CAST(N'2013-03-08T08:21:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (203, N'GRECIA', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (203, N'GRECIA', 2, 1, CAST(N'2013-03-08T08:20:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (204, N'SAN MATEO', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (204, N'SAN MATEO', 2, 1, CAST(N'2013-06-18T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (205, N'ATENAS', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (205, N'ATENAS', 2, 1, CAST(N'2021-03-06T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (206, N'NARANJO', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (206, N'NARANJO', 2, 1, CAST(N'2001-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (207, N'PALMARES', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (207, N'PALMARES', 2, 1, CAST(N'2002-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (208, N'POAS', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (208, N'POAS', 2, 1, CAST(N'2003-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (209, N'OROTINA', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (209, N'OROTINA', 2, 1, CAST(N'2019-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (210, N'SAN CARLOS', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (210, N'SAN CARLOS', 2, 1, CAST(N'2018-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (211, N'ALFARO RUIZ', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (211, N'ALFARO RUIZ', 2, 1, CAST(N'2017-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (212, N'VALVERDE VEGA', 2, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (212, N'VALVERDE VEGA', 2, 1, CAST(N'2018-03-13T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (213, N'UPALA', 2, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (213, N'UPALA', 2, 1, CAST(N'2023-03-14T08:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (214, N'LOS CHILES', 2, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (214, N'LOS CHILES', 2, 1, CAST(N'2023-03-12T08:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (215, N'GUATUSO', 2, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (215, N'GUATUSO', 2, 1, CAST(N'2022-03-09T08:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (301, N'CARTA', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (301, N'CARTA', 3, 1, CAST(N'2023-03-08T08:13:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (302, N'PARAISO', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (302, N'PARAISO', 3, 1, CAST(N'2023-03-08T08:43:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (303, N'LA UNION', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (303, N'LA UNION', 3, 1, CAST(N'2023-03-08T08:33:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (304, N'JIMENEZ', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (304, N'JIMENEZ', 3, 1, CAST(N'2023-03-08T08:53:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (305, N'TURRIALBA', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (305, N'TURRIALBA', 3, 1, CAST(N'2023-03-08T16:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (306, N'ALVARADO', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (306, N'ALVARADO', 3, 1, CAST(N'2023-03-08T15:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (307, N'OREAMUNO', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (307, N'OREAMUNO', 3, 1, CAST(N'2023-03-08T11:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (308, N'EL GUARCO', 3, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (308, N'EL GUARCO', 3, 1, CAST(N'2023-03-08T12:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (401, N'HEREDIA', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (401, N'HEREDIA', 4, 1, CAST(N'2023-03-08T12:23:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (402, N'BARVA', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (402, N'BARVA', 4, 1, CAST(N'2023-03-08T08:44:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (403, N'SANTO DOMIN', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (403, N'SANTO DOMIN', 4, 1, CAST(N'2023-03-08T08:27:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (404, N'SANTA BARBARA', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (404, N'SANTA BARBARA', 4, 1, CAST(N'2023-03-08T08:21:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (405, N'SAN RAFAEL', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (405, N'SAN RAFAEL', 4, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (406, N'SAN ISIDRO', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (406, N'SAN ISIDRO', 4, 1, CAST(N'2023-03-08T08:26:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (407, N'BELEN', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (407, N'BELEN', 4, 1, CAST(N'2023-03-08T08:27:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (408, N'FLORES', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (408, N'FLORES', 4, 1, CAST(N'2023-03-08T08:28:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (409, N'SAN PABLO', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (409, N'SAN PABLO', 4, 1, CAST(N'2023-03-08T08:29:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (410, N'SARAPIQUI', 4, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (410, N'SARAPIQUI', 4, 1, CAST(N'2023-03-08T08:31:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (501, N'LIBERIA', 5, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (501, N'LIBERIA', 5, 1, CAST(N'2023-03-08T08:32:00' AS SmallDateTime), NULL)
 
 INSERT [dbo].[tblCanton] ([Id], [Nombre], [fk_Id_Provincia], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (502, N'NICOYA', 5, 1, CAST(N'2023-03-08T08:24:00' AS SmallDateTime), NULL)
 
@@ -371,285 +369,285 @@ INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCrea
 
 INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11006, N'BRASIL', 110, 1, CAST(N'2023-03-08T08:21:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11101, N'SAN ISIDRO', 111, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11101, N'SAN ISIDRO', 111, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11102, N'SAN RAFAEL', 111, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11102, N'SAN RAFAEL', 111, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11103, N'DULCE NOMBRE', 111, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11103, N'DULCE NOMBRE', 111, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11104, N'PATALILLO', 111, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11104, N'PATALILLO', 111, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11105, N'CASCAJAL', 111, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11105, N'CASCAJAL', 111, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11201, N'SAN IGNASIO', 112, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11201, N'SAN IGNASIO', 112, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11202, N'GUAITIL', 112, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11202, N'GUAITIL', 112, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11203, N'PALMICHAL', 112, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11203, N'PALMICHAL', 112, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11204, N'CANGREJAL', 112, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11204, N'CANGREJAL', 112, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11205, N'SABANILLAS', 112, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11205, N'SABANILLAS', 112, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11301, N'SAN JUAN', 113, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11301, N'SAN JUAN', 113, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11302, N'CINCO ESQUINAS', 113, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11302, N'CINCO ESQUINAS', 113, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11303, N'ANSELMO LLORENTE', 113, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11303, N'ANSELMO LLORENTE', 113, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11304, N'LEON 13', 113, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11304, N'LEON 13', 113, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11305, N'COLIMA', 113, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11305, N'COLIMA', 113, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11401, N'SAN VICENTE', 114, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11401, N'SAN VICENTE', 114, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11402, N'SAN JERONIMO', 114, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11402, N'SAN JERONIMO', 114, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11403, N'LA TRINIDAD', 114, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11403, N'LA TRINIDAD', 114, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11501, N'SAN PEDRO', 115, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11501, N'SAN PEDRO', 115, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11502, N'SABANILLA', 115, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11502, N'SABANILLA', 115, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11503, N'MERCEDES', 115, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11503, N'MERCEDES', 115, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11504, N'SAN RAFAEL', 115, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11504, N'SAN RAFAEL', 115, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11601, N'SAN PABLO', 116, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11601, N'SAN PABLO', 116, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11602, N'SAN PEDRO', 116, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11602, N'SAN PEDRO', 116, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11603, N'SAN JUAN DE MATA', 116, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11603, N'SAN JUAN DE MATA', 116, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11604, N'SAN LUIS', 116, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11604, N'SAN LUIS', 116, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11605, N'CARARA', 116, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11605, N'CARARA', 116, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11701, N'SANTA MARIA', 117, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11701, N'SANTA MARIA', 117, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11702, N'JARDIN', 117, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11702, N'JARDIN', 117, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11703, N'COPEY', 117, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11703, N'COPEY', 117, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11801, N'CURRIDABAT', 118, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11801, N'CURRIDABAT', 118, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11802, N'GRANADILLA', 118, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11802, N'GRANADILLA', 118, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11803, N'SANCHEZ', 118, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11803, N'SANCHEZ', 118, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11804, N'TIRRASES', 118, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11804, N'TIRRASES', 118, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11901, N'SAN ISIDRO DEL GENERAL', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11901, N'SAN ISIDRO DEL GENERAL', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11902, N'GENERAL', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11902, N'GENERAL', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11903, N'DANIEL FLORES', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11903, N'DANIEL FLORES', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11904, N'RIVAS', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11904, N'RIVAS', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11905, N'SAN PEDRO', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11905, N'SAN PEDRO', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11906, N'PLATANARES', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11906, N'PLATANARES', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11907, N'PEJIBAYE', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11907, N'PEJIBAYE', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11908, N'CAJON', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11908, N'CAJON', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11909, N'BARU', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11909, N'BARU', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11910, N'RIO NUEVO', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11910, N'RIO NUEVO', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11911, N'PARAMO', 119, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (11911, N'PARAMO', 119, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12001, N'SAN PABLO', 120, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12001, N'SAN PABLO', 120, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12002, N'SAN ANDRES', 120, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12002, N'SAN ANDRES', 120, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12003, N'LLANO BONITO', 120, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12003, N'LLANO BONITO', 120, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12004, N'SAN ISIDRO', 120, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12004, N'SAN ISIDRO', 120, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12005, N'SANTA CRUZ', 120, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12005, N'SANTA CRUZ', 120, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12006, N'SAN ANTONIO', 120, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (12006, N'SAN ANTONIO', 120, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20101, N'ALAJUELA', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20101, N'ALAJUELA', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20102, N'BARRIO SAN JOSE', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20102, N'BARRIO SAN JOSE', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20103, N'CARRIZAL', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20103, N'CARRIZAL', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20104, N'SAN ANTONIO', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20104, N'SAN ANTONIO', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20105, N'GUACIMA', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20105, N'GUACIMA', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20106, N'SAN ISIDRO', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20106, N'SAN ISIDRO', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20107, N'SABANILLA', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20107, N'SABANILLA', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20108, N'SAN RAFAEL', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20108, N'SAN RAFAEL', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20109, N'RIO SEGUNDO', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20109, N'RIO SEGUNDO', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20110, N'DESAMPARADOS', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20110, N'DESAMPARADOS', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20111, N'TURRUCARES', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20111, N'TURRUCARES', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20112, N'TAMBOR', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20112, N'TAMBOR', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20113, N'GARITA', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20113, N'GARITA', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20114, N'SARAPIQUI', 201, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20114, N'SARAPIQUI', 201, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20201, N'SAN RAMON', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20201, N'SAN RAMON', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20202, N'SANTIA', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20202, N'SANTIA', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20203, N'SAN JUAN', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20203, N'SAN JUAN', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20204, N'PIEDADES NORTE', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20204, N'PIEDADES NORTE', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20205, N'PIEDADES SUR', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20205, N'PIEDADES SUR', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20206, N'SAN RAFAEL', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20206, N'SAN RAFAEL', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20207, N'SAN ISIDRO', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20207, N'SAN ISIDRO', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20208, N'ANGELES', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20208, N'ANGELES', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20209, N'ALFARO', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20209, N'ALFARO', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20210, N'VOLIO', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20210, N'VOLIO', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20211, N'CONCEPCION', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20211, N'CONCEPCION', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20212, N'ZAPOTAL', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20212, N'ZAPOTAL', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20213, N'PEÑAS BLANCAS', 202, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20213, N'PEÑAS BLANCAS', 202, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20301, N'GRECIA', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20301, N'GRECIA', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20302, N'SAN ISIDRO', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20302, N'SAN ISIDRO', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20303, N'SAN JOSE', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20303, N'SAN JOSE', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20304, N'SAN ROQUE', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20304, N'SAN ROQUE', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20305, N'TACARES', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20305, N'TACARES', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20306, N'RIO CUARTO', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20306, N'RIO CUARTO', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20307, N'PUENTE DE PIEDRA', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20307, N'PUENTE DE PIEDRA', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20308, N'BOLIVAR', 203, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20308, N'BOLIVAR', 203, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20401, N'SAN MATEO', 204, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20401, N'SAN MATEO', 204, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20402, N'DESMONTE', 204, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20402, N'DESMONTE', 204, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20403, N'JESUS MARIA', 204, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20403, N'JESUS MARIA', 204, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20501, N'ATENAS', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20501, N'ATENAS', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20502, N'JESUS', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20502, N'JESUS', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20503, N'MERCEDES', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20503, N'MERCEDES', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20504, N'SAN ISIDRO', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20504, N'SAN ISIDRO', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20505, N'CONCEPCION', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20505, N'CONCEPCION', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20506, N'SAN JOSE', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20506, N'SAN JOSE', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20507, N'SANTA EULALIA', 205, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20507, N'SANTA EULALIA', 205, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20601, N'NARANJO', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20601, N'NARANJO', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20602, N'SAN MIGUEL', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20602, N'SAN MIGUEL', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20603, N'SAN JOSE', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20603, N'SAN JOSE', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20604, N'CIRRI SURR', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20604, N'CIRRI SURR', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20605, N'SAN JERONIMO', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20605, N'SAN JERONIMO', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20606, N'SAN JUAN', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20606, N'SAN JUAN', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20607, N'ROSARIO', 206, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20607, N'ROSARIO', 206, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20701, N'PALMARES', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20701, N'PALMARES', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20702, N'ZARAZA', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20702, N'ZARAZA', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20703, N'BUENOS AIRES', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20703, N'BUENOS AIRES', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20704, N'SANTIA', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20704, N'SANTIA', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20705, N'CANDELARIA', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20705, N'CANDELARIA', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20706, N'ESQUIPULAS', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20706, N'ESQUIPULAS', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20707, N'GRANJA', 207, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20707, N'GRANJA', 207, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20801, N'SAN PEDRO', 208, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20801, N'SAN PEDRO', 208, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20802, N'SAN JUAN', 208, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20802, N'SAN JUAN', 208, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20803, N'SAN RAFAEL', 208, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20803, N'SAN RAFAEL', 208, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20804, N'CARRILLOS', 208, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20804, N'CARRILLOS', 208, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20805, N'SABANA REDONDA', 208, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20805, N'SABANA REDONDA', 208, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20901, N'OROTINA', 209, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20901, N'OROTINA', 209, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20902, N'MASTATE', 209, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20902, N'MASTATE', 209, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20903, N'HACIENDA VIEJA', 209, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20903, N'HACIENDA VIEJA', 209, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20904, N'COYOLAR', 209, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20904, N'COYOLAR', 209, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20905, N'CEIBA', 209, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (20905, N'CEIBA', 209, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21001, N'CIUDAD QUESADA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21001, N'CIUDAD QUESADA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21002, N'FLORENCIA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21002, N'FLORENCIA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21003, N'BUENA VISTA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21003, N'BUENA VISTA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21004, N'AGUAS ZARCAS', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21004, N'AGUAS ZARCAS', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21005, N'VENECIA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21005, N'VENECIA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21006, N'PITAL', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21006, N'PITAL', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21007, N'FORTUNA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21007, N'FORTUNA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21008, N'TIGRA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21008, N'TIGRA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21009, N'PALMERA', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21009, N'PALMERA', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21010, N'VENADO', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21010, N'VENADO', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21011, N'CUTRIS', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21011, N'CUTRIS', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21012, N'MONTERREY', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21012, N'MONTERREY', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21013, N'POCOSOL', 210, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21013, N'POCOSOL', 210, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21101, N'ZARCERO', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21101, N'ZARCERO', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21102, N'LAGUNA', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21102, N'LAGUNA', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21103, N'TAPEZCO', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21103, N'TAPEZCO', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21104, N'GUADALUPE', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21104, N'GUADALUPE', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21105, N'PALMIRA', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21105, N'PALMIRA', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21106, N'ZAPOTE', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21106, N'ZAPOTE', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
-INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21107, N'BRISA', 211, 1, CAST(N'2023-03-08T08:22:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21107, N'BRISA', 211, 1, CAST(N'2013-03-08T08:22:00' AS SmallDateTime), NULL)
 
 INSERT [dbo].[tblDistrito] ([Id], [Nombre], [fk_Id_Canton], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (21201, N'SARCHI NORTE', 212, 1, CAST(N'2023-03-08T08:23:00' AS SmallDateTime), NULL)
 

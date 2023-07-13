@@ -26,11 +26,6 @@ BEGIN
     FROM (
     SELECT COUNT(DISTINCT D.Nombre) AS TotalDenominaciones
                         FROM tblDenominaciones D
-                        LEFT JOIN tblDenominaciones_x_Modulo DM 
-						ON D.Id = DM.FkIdDenominaciones
-						AND DM.Activo = 1
-                        LEFT JOIN tblModulo M 
-						ON DM.FkIdModulo = M.Id
 						INNER JOIN tblDivisa DI 
 						ON D.IdDivisa = DI.Id
 						INNER JOIN tblTipoEfectivo TI

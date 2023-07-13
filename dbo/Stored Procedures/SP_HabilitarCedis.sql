@@ -36,6 +36,9 @@ BEGIN
   DECLARE @p_1 NVARCHAR(MAX)
   DECLARE @p_2 NVARCHAR(MAX)
   DECLARE @ROW NVARCHAR(MAX)
+  DECLARE @ERROR_NUMBER_SP_HabilitarCedis NVARCHAR(MAX) = NULL
+  DECLARE @ID_ERROR_HabilitarCedis NVARCHAR(MAX) = CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))
+  DECLARE @ROW_ERROR_HabilitarCedis NVARCHAR(MAX) = NULL
 
   IF(@JSON_IN IS NOT NULL OR @JSON_IN != '')
   BEGIN
@@ -130,9 +133,9 @@ BEGIN
 							  SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 							, CAST(0 AS BIT)														AS SUCCESS
 							, @ERROR_MESSAGE	                                                    AS ERROR_MESSAGE_SP
-							, NULL																	AS ERROR_NUMBER_SP
-							, CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))							AS ID
-							, NULL																	AS ROW 
+							, @ERROR_NUMBER_SP_HabilitarCedis										AS ERROR_NUMBER_SP
+							, @ID_ERROR_HabilitarCedis							                    AS ID
+							, @ROW_ERROR_HabilitarCedis												AS ROW 
 							FOR JSON PATH, INCLUDE_NULL_VALUES
 						)
 
@@ -162,9 +165,9 @@ BEGIN
 							  SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 							, CAST(0 AS BIT)														AS SUCCESS
 							, 'Error, se resivieron datos null'										AS ERROR_MESSAGE_SP
-							, NULL																	AS ERROR_NUMBER_SP
-							, CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))							AS ID
-							, NULL																	AS ROW 
+							, @ERROR_NUMBER_SP_HabilitarCedis										AS ERROR_NUMBER_SP
+							, @ID_ERROR_HabilitarCedis							                    AS ID
+							, @ROW_ERROR_HabilitarCedis												AS ROW 
 							FOR JSON PATH, INCLUDE_NULL_VALUES
 						)
 

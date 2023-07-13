@@ -41,6 +41,9 @@ BEGIN
   DECLARE @p_1 NVARCHAR(MAX)
   DECLARE @p_2 NVARCHAR(MAX)
   DECLARE @ROW NVARCHAR(MAX)
+  DECLARE @ERROR_NUMBER_SP_InsertPais NVARCHAR(MAX) = NULL
+  DECLARE @ID_ERROR_InsertPais NVARCHAR(MAX) = CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))
+  DECLARE @ROW_ERROR_InsertPais NVARCHAR(MAX) = NULL
 
   IF(@JSON_IN IS NOT NULL OR @JSON_IN != '')
   BEGIN
@@ -119,9 +122,9 @@ BEGIN
 							  SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 							, CAST(0 AS BIT)														AS SUCCESS
 							, @ERROR_MESSAGE                                                     	AS ERROR_MESSAGE_SP
-							, NULL																	AS ERROR_NUMBER_SP
-							, CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))							AS ID
-							, NULL																	AS ROW 
+							, @ERROR_NUMBER_SP_InsertPais											AS ERROR_NUMBER_SP
+							, @ID_ERROR_InsertPais							                        AS ID
+							, @ROW_ERROR_InsertPais													AS ROW 
 							FOR JSON PATH, INCLUDE_NULL_VALUES
 						)
 
@@ -150,10 +153,10 @@ BEGIN
 						(
 							  SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 							, CAST(0 AS BIT)														AS SUCCESS
-							, 'Error, se resivieron datos nulos'										AS ERROR_MESSAGE_SP
-							, NULL																	AS ERROR_NUMBER_SP
-							, CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))							AS ID
-							, NULL																	AS ROW 
+							, 'Error, se resivieron datos nulos'									AS ERROR_MESSAGE_SP
+							, @ERROR_NUMBER_SP_InsertPais											AS ERROR_NUMBER_SP
+							, @ID_ERROR_InsertPais							                        AS ID
+							, @ROW_ERROR_InsertPais													AS ROW 
 							FOR JSON PATH, INCLUDE_NULL_VALUES
 						)
 

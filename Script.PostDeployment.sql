@@ -1,12 +1,7 @@
 ﻿/*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
- This file contains SQL statements that will be appended to the build script.		
- Use SQLCMD syntax to include a file in the post-deployment script.			
- Example:      :r .\myfile.sql								
- Use SQLCMD syntax to reference a variable in the post-deployment script.		
- Example:      :setvar TableName MyTable							
-               SELECT * FROM [$(TableName)]					
+ This file contains SQL statements that will be appended to the build script.						
 --------------------------------------------------------------------------------------
 */
 Use [Sites.Global];
@@ -28,9 +23,9 @@ IF NOT EXISTS ( SELECT * FROM [dbo].[tblDivisa] where [Nombre] = 'Colón' OR [No
 BEGIN
 SET IDENTITY_INSERT [dbo].[tblDivisa] ON 
 
-INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (1, N'Colón', N'CRC', N'¢', N'Moneda De Costa Rica', 1, CAST(N'2023-01-24T10:16:00' AS SmallDateTime), NULL)
-INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (2, N'Dólar', N'USD', N'$', N'Moneda De Estados Unidos', 1, CAST(N'2023-01-24T10:16:00' AS SmallDateTime), NULL)
-INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (3, N'Euro', N'EUR', N'€', N'Moneda De La Union Europea', 1, CAST(N'2023-01-24T10:16:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (1, N'Colón', N'CRC', N'¢', N'Moneda De Costa Rica', 1, CAST(N'2021-02-24T10:16:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (2, N'Dólar', N'USD', N'$', N'Moneda De Estados Unidos', 1, CAST(N'2021-03-24T10:16:00' AS SmallDateTime), NULL)
+INSERT [dbo].[tblDivisa] ([Id], [Nombre], [Nomenclatura], [Simbolo], [Descripcion], [Activo], [FechaCreacion], [FechaModificacion]) VALUES (3, N'Euro', N'EUR', N'€', N'Moneda De La Union Europea', 1, CAST(N'2021-04-24T10:16:00' AS SmallDateTime), NULL)
 SET IDENTITY_INSERT [dbo].[tblDivisa] OFF
 END
 GO

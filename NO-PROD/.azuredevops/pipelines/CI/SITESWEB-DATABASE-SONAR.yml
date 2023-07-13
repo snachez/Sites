@@ -24,7 +24,9 @@ stages:
     pool:
       name: $(BuildPoolName)
     steps:      
-      - template: 'yaml-templates/steps/BuildSonarManualScan.yml@ExternalTemplates'
-        parameters:
-            sonarQube: 'SONAR CR-TI-SITESWEB-DATABASE'
-            cliProjectKey: 'SITESWEB-DATABASE'
+    - template: 'yaml-templates/steps/BuildSQLServerTaskReportSonarV2.yml@ExternalTemplates'
+      parameters:
+        sonarConnection: 'SONARCLOUD ORG-CRI-GTI-SITESWEB'
+        sonarOrganization: 'org-cri-gti'
+        sonarProjectName: 'SITESWEB-BD-GLOBAL'
+        sonarProjectKey: 'ORG-CRI-GTI_SITESWEB-BD-GLOBAL'

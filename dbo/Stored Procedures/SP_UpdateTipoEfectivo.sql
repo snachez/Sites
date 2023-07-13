@@ -8,18 +8,24 @@ AS
 BEGIN
 	---
 	BEGIN TRY
+
+		DECLARE @ROW NVARCHAR(MAX)
+		DECLARE @MESSAGE NVARCHAR(MAX)
+		
+				UPDATE tblTipoEfectivo SET 
+				Nombre = @NOMBRE,
+				Activo = @ACTIVO, 
+				FechaModificacion = CURRENT_TIMESTAMP 
+				WHERE Id = @ID
+
+				SET @MESSAGE = 'Se modifico satisfactoriamente el tipo de efectivo!'
+
 		---
-		UPDATE tblTipoEfectivo SET 
-		Nombre = @NOMBRE,
-		Activo = @ACTIVO, 
-		FechaModificacion = CURRENT_TIMESTAMP 
-		WHERE Id = @ID
-		---
-		DECLARE @ROW NVARCHAR(MAX) = (SELECT * FROM tblTipoEfectivo WHERE Id = @ID FOR JSON PATH)
+		SET @ROW = (SELECT * FROM tblTipoEfectivo WHERE Id = @ID FOR JSON PATH)
 		---
 		SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 				, CAST(1 AS BIT)											AS SUCCESS
-				, 'Se modifico satisfactoriamente el tipo de efectivo!'    			AS ERROR_MESSAGE_SP
+				, @MESSAGE									    			AS ERROR_MESSAGE_SP
 				, NULL														AS ERROR_NUMBER_SP
 				, CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))				AS ID
 				, @ROW														AS ROW
@@ -34,6 +40,11 @@ BEGIN
 			SET @ERROR_MESSAGE = 'El nombre del Tipo de Efectivo que intenta ingresar ya existe'
 			---
 		END	
+					IF ERROR_MESSAGE() LIKE '%Constrains_Validate_Relaciones_TipoEfectivo%' BEGIN 
+			       ---
+			       SET @ERROR_MESSAGE = 'Esta Presentación  tiene denominaciones, divisas o unidades de medida activas relacionadas, debe desactivar todas los valores relacionados antes de  desactivar esta presentación'
+				   ---
+		           END	
 		--
 		SELECT	  0															AS ROWS_AFFECTED
 		        , CAST(0 AS BIT)											AS SUCCESS

@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[SP_SelectTipoEfectivo_x_Divisa](
 AS
 BEGIN
 	---
-		--EXECUTE SP_SelectTipoEfectivo_x_Divisa @NOMBRE_TIPOEFECTIVO = null,  @FK_ID_DIVISA = 32, @ACTIVO = 1
+		--EXECUTE SP_SelectTipoEfectivo_x_Divisa @NOMBRE_TIPOEFECTIVO = null,  @FK_ID_DIVISA = 34, @ACTIVO = 1
 								
 	---
 	DECLARE @JSONRESULT NVARCHAR(MAX) = (SELECT     DxT.FkIdTipoEfectivo		AS [Id]											

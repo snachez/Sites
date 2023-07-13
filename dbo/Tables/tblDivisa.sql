@@ -8,9 +8,12 @@
     [FechaCreacion]     SMALLDATETIME  CONSTRAINT [DF__tblDivisa__Fecha__3864608B] DEFAULT (CONVERT([smalldatetime],getdate())) NOT NULL,
     [FechaModificacion] SMALLDATETIME  NULL,
     CONSTRAINT [PK__tblDivis__3214EC07FE718203] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [Constrains_Validate_Relaciones_Divisas] CHECK ([dbo].[FN_VALIDACION_CONTRAINT_CHANGE_ESTADO_tblDivisas]([Activo],[Id])=(0)),
     CONSTRAINT [Unique_Nombre_Divisa] UNIQUE NONCLUSTERED ([Nombre] ASC),
     CONSTRAINT [Unique_Nomenclatura_Divisa] UNIQUE NONCLUSTERED ([Nomenclatura] ASC)
 );
+
+
 
 
 

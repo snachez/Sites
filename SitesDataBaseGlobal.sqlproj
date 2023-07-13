@@ -269,6 +269,8 @@
     <Build Include="dbo\Functions\FN_VALIDACION_CONTRAINT_tblDenominaciones.sql" />
     <Build Include="dbo\Functions\FN_VALIDACION_CONTRAINT_DESACTIVAR_tblTipoEfectivo.sql" />
     <Build Include="dbo\Functions\FN_VALIDACION_CONTRAINT_CHANGE_ESTADO_tblDivisas.sql" />
+    <Build Include="dbo\Functions\FN_VALIDACION_CONTRAINT_CHANGE_ESTADO_tblDenominaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_Tipo_Efectivo_X_Divisa.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

@@ -5,35 +5,13 @@ BEGIN
 	---
 	BEGIN TRY
 		---
-
-		DECLARE @VALIDATE BIT = 0
-		DECLARE @ROW_Asociados INT = 0
-
-		SET @VALIDATE = (SELECT [dbo].FN_VALIDACION_CONTRAINT_DESACTIVAR_tblTipoEfectivo(@ACTIVO,@ID))
-
-		IF(@VALIDATE = 0)
-		BEGIN
 			UPDATE tblTipoEfectivo SET Activo = @ACTIVO, FechaModificacion = CURRENT_TIMESTAMP WHERE Id = @ID
-		END
-		ELSE
-		BEGIN
-			 SET @ROW_Asociados = @ROW_Asociados + 1;
-		END
 
-
-		
-		
 		---
 		DECLARE @ROW NVARCHAR(MAX) 
+		
+		SET @ROW  = (SELECT * FROM tblTipoEfectivo WHERE Id = @ID FOR JSON PATH)	
 
-		IF(@ROW_Asociados = 0)
-		BEGIN		
-		SET @ROW  = (SELECT * FROM tblTipoEfectivo WHERE Id = @ID FOR JSON PATH)
-		END
-		ELSE
-		BEGIN
-		SET @ROW = 'Esta Presentación  tiene denominaciones, divisas o unidades de medida activas relacionadas, debe desactivar todas los valores relacionados antes de  desactivar esta presentación'
-		END
 		---
 		SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 				, CAST(1 AS BIT)											AS SUCCESS
@@ -46,6 +24,11 @@ BEGIN
 	BEGIN CATCH
 		--	
 		DECLARE @ERROR_MESSAGE NVARCHAR(MAX) = ERROR_MESSAGE()
+				IF ERROR_MESSAGE() LIKE '%Constrains_Validate_Relaciones_TipoEfectivo%' BEGIN 
+			       ---
+			       SET @ERROR_MESSAGE = 'Esta Presentación  tiene denominaciones, divisas o unidades de medida activas relacionadas, debe desactivar todas los valores relacionados antes de  desactivar esta presentación'
+				   ---
+		           END	
 	
 		SELECT	  CAST(0 AS BIT)											AS SUCCESS
 				, @ERROR_MESSAGE											AS ERROR_MESSAGE_SP

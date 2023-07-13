@@ -78,7 +78,7 @@ BEGIN
 						OR D.Nombre LIKE @CONCAT
 					    OR D.Nomenclatura LIKE @CONCAT
 						OR D.Descripcion LIKE @CONCAT
-						GROUP BY D.Nombre, D.Id, D.Activo, D.Nomenclatura, D.Descripcion, TE.Id )
+						GROUP BY D.Nombre, D.Id, D.Activo, D.Nomenclatura, D.Descripcion )
 						SELECT * INTO #tmpTblDataResult FROM DATA_INDEXED WHERE [INDEX] 
 						BETWEEN '+ CONVERT(VARCHAR(12), (@PAGE) ) + ' AND ' + CONVERT(VARCHAR(12), ((@PAGE)+(@SIZE-1)))+ '
 										---

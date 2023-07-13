@@ -2,6 +2,7 @@
 (
 @ID     INT,
 @NOMBRE NVARCHAR(MAX), 
+@ACTIVO BIT,
 @NOMENCLATURA	NVARCHAR(MAX),
 @DESCRIPCION	NVARCHAR(MAX)
 )
@@ -10,18 +11,26 @@ BEGIN
 	---
 	BEGIN TRY
 		---
-		UPDATE tblDivisa SET 
-		Nombre = @NOMBRE,
-		Nomenclatura = @NOMENCLATURA,
-		Descripcion = @DESCRIPCION, 
-		FechaModificacion = CURRENT_TIMESTAMP 
-		WHERE Id = @ID
+
+	DECLARE @ROW NVARCHAR(MAX)
+	DECLARE @MESSAGE NVARCHAR(MAX)
+
+			UPDATE tblDivisa SET 
+			Nombre = @NOMBRE,
+			Nomenclatura = @NOMENCLATURA,
+			Activo = @ACTIVO,
+			Descripcion = @DESCRIPCION, 
+			FechaModificacion = CURRENT_TIMESTAMP 
+			WHERE Id = @ID
+
+			SET @MESSAGE = 'Se modifico satisfactoriamente la divisa!'
+
 		---
-		DECLARE @ROW NVARCHAR(MAX) = (SELECT * FROM tblDivisa WHERE Id = @ID FOR JSON PATH)
+		SET @ROW  = (SELECT * FROM tblDivisa WHERE Id = @ID FOR JSON PATH)
 		---
 		SELECT	  @@ROWCOUNT												AS ROWS_AFFECTED
 				, CAST(1 AS BIT)											AS SUCCESS
-				, 'Se modifico satisfactoriamente la divisa!'    			AS ERROR_MESSAGE_SP
+				, @MESSAGE    												AS ERROR_MESSAGE_SP
 				, NULL														AS ERROR_NUMBER_SP
 				, CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))				AS ID
 				, @ROW														AS ROW
@@ -41,6 +50,11 @@ BEGIN
 			SET @ERROR_MESSAGE = 'El simbolo de la divisa ya existe'
 			---
 	    END	
+		IF ERROR_MESSAGE() LIKE '%Constrains_Validate_Relaciones_Divisas%' BEGIN 
+			       ---
+			SET @ERROR_MESSAGE = 'Esta divisa tiene relaciones en estados activos o desactivos que invalidan esta operacion'
+				   ---
+		END
 		--
 		SELECT	  0															AS ROWS_AFFECTED
 		        , CAST(0 AS BIT)											AS SUCCESS

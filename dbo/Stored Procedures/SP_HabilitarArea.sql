@@ -1,6 +1,4 @@
-﻿
-
-CREATE   PROCEDURE SP_HabilitarArea(@ID INT, @ACTIVO BIT)
+﻿CREATE   PROCEDURE SP_HabilitarArea(@ID INT, @ACTIVO BIT)
 AS
 BEGIN
 	---
@@ -36,6 +34,24 @@ BEGIN
 	END TRY    
 	BEGIN CATCH
 		--
+		SET @ROW =						(SELECT     A.Id							AS [Id]
+												 , A.Nombre						AS [Nombre]
+												 --, A.Fk_Id_Departamento			AS [Fk_Id_Departamento]
+												 , A.Codigo						AS [Codigo]
+												 , A.Activo						AS [Activo]
+												 , A.FechaCreacion				AS [FechaCreacion]
+												 , A.FechaModificacion			AS [FechaModificacion]
+
+												 , D.Id							AS [Departamento.Id]
+												 , D.Nombre						AS [Departamento.Nombre]
+												 , D.Activo						AS [Departamento.Activo]
+												 , D.FechaCreacion				AS [Departamento.FechaCreacion]
+												 , D.FechaModificacion			AS [Departamento.FechaModificacion]
+
+										FROM tblArea A
+										INNER JOIN tblDepartamento D
+										ON A.Fk_Id_Departamento = D.Id WHERE A.Id = @ID FOR JSON PATH)
+		--
 		DECLARE @ERROR_MESSAGE NVARCHAR(MAX) = ERROR_MESSAGE()
 		---
 		DECLARE @CONSTRAINT_NAME NVARCHAR(MAX) = ''
@@ -56,7 +72,7 @@ BEGIN
 				, ERROR_NUMBER()											AS ERROR_NUMBER_SP
 				, 0															AS ROWS_AFFECTED
 				, -1														AS ID
-				, NULL														AS ROW
+				, @ROW														AS ROW
 
 		--   
 	END CATCH

@@ -1,4 +1,7 @@
-﻿CREATE   PROCEDURE SP_UpdateArea (@ID INT, @NOMBRE NVARCHAR(MAX) = NULL, @FK_ID_DEPARTAMENTO INT = NULL, @ACTIVO BIT = NULL)
+﻿
+---
+
+CREATE   PROCEDURE SP_UpdateArea (@ID INT, @NOMBRE NVARCHAR(MAX) = NULL, @FK_ID_DEPARTAMENTO INT = NULL, @ACTIVO BIT = NULL)
 AS
 BEGIN
 	---
@@ -42,7 +45,7 @@ BEGIN
 		IF @ERROR_MESSAGE LIKE '%t2_C1_Unique_Nombre_Area%' BEGIN 
 			---
 			SET @CONSTRAINT_NAME = 't2_C1_Unique_Nombre_Area'
-			SET @DEPARTAMENTO = (SELECT D.Nombre FROM tblArea A INNER JOIN tblDepartamento D ON A.Fk_Id_Departamento = D.Id WHERE A.Id = @ID)
+			SET @DEPARTAMENTO = (SELECT Nombre FROM tblDepartamento WHERE Id = @FK_ID_DEPARTAMENTO)
 			SET @NOMBRE = ISNULL(@NOMBRE, (SELECT Nombre FROM tblArea WHERE Id = @ID))
 			SET @ERROR_MESSAGE = 'El nombre de área "' + @NOMBRE + '" ya existe asociada al departamento "' + @DEPARTAMENTO + '". Favor seleccionar otro nombre o cambie el departamento asociado'
 			---
@@ -54,7 +57,7 @@ BEGIN
 		END ELSE IF @ERROR_MESSAGE LIKE '%t2_C3_Asignacion_Departamento_Activo%' BEGIN 
 			---
 			SET @CONSTRAINT_NAME = 't2_C3_Asignacion_Departamento_Activo'
-			SET @DEPARTAMENTO = (SELECT D.Nombre FROM tblArea A INNER JOIN tblDepartamento D ON A.Fk_Id_Departamento = D.Id WHERE A.Id = @ID)
+			SET @DEPARTAMENTO = (SELECT Nombre FROM tblDepartamento WHERE Id = @FK_ID_DEPARTAMENTO)
 			SET @ERROR_MESSAGE = 'El departamento "' + @DEPARTAMENTO + '" se encuentra inactivo en base de datos. Favor seleccionar otro departamento que sea valido'
 			---
 		END

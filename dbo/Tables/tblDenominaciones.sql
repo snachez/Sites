@@ -9,8 +9,11 @@
     [FechaCreacion]     SMALLDATETIME CONSTRAINT [DF_tblDenominaciones_FechaCreacion] DEFAULT (CONVERT([smalldatetime],getdate())) NULL,
     [FechaModificacion] SMALLDATETIME NULL,
     CONSTRAINT [PK] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [Contrains_Validate_Relaciones_Denominaciones] CHECK ([dbo].[FN_VALIDACION_CONTRAINT_CHANGE_ESTADO_tblDenominaciones]([Activo],[Id])=(0)),
     CONSTRAINT [UNIQUE_NOMINAL_DIVISA_BMO] UNIQUE NONCLUSTERED ([ValorNominal] ASC, [IdDivisa] ASC, [BMO] ASC)
 );
+
+
 
 
 

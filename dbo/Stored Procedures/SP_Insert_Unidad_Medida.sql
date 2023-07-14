@@ -14,20 +14,20 @@ BEGIN
 	  SET @JSON_IN = REPLACE( @JSON_IN,'\','')
 
 	  --DECLARACION DE VARIABLES PARA ACCEER A LAS PROPIEDADES Y VALORES QUE VIENEN DENTRO DEL JSON
-	  DECLARE @p_Nombre_Unidad_Medida VARCHAR(MAX) 
-	  DECLARE @p_Simbolo_Unidad_Medida VARCHAR(MAX)
-	  DECLARE @p_Cantidad_Unidades INT
-	  DECLARE @p_Activo_Unidad_Medida BIT
+	  DECLARE @p_Nombre_Insert_Unidad_Medida VARCHAR(MAX) 
+	  DECLARE @p_Simbolo_Insert_Unidad_Medida VARCHAR(MAX)
+	  DECLARE @p_Cantidad_Insert_Unidad_Medida INT
+	  DECLARE @p_Activo_Insert_Unidad_Medida BIT
 
 	  --AUN NO ESTAN EN USO
 	  DECLARE @p_user_id INT 
 	  DECLARE @Action VARCHAR(1)
 
 	  --SETEANDO LOS VALORES DEL JSON (TABLA PADRE UNIDADES DE MEDIDAS)
-	  SELECT @p_Nombre_Unidad_Medida = Nombre FROM OPENJSON( @JSON_IN) WITH ( Nombre VARCHAR(MAX) )
-	  SELECT @p_Simbolo_Unidad_Medida = Simbolo FROM OPENJSON( @JSON_IN) WITH ( Simbolo VARCHAR(MAX) )
-	  SELECT @p_Cantidad_Unidades = Cantidad_Unidades FROM OPENJSON( @JSON_IN) WITH ( Cantidad_Unidades INT )
-	  SELECT @p_Activo_Unidad_Medida = Activo FROM OPENJSON( @JSON_IN) WITH ( Activo BIT )
+	  SELECT @p_Nombre_Insert_Unidad_Medida = Nombre FROM OPENJSON( @JSON_IN) WITH ( Nombre VARCHAR(MAX) )
+	  SELECT @p_Simbolo_Insert_Unidad_Medida = Simbolo FROM OPENJSON( @JSON_IN) WITH ( Simbolo VARCHAR(MAX) )
+	  SELECT @p_Cantidad_Insert_Unidad_Medida = Cantidad_Unidades FROM OPENJSON( @JSON_IN) WITH ( Cantidad_Unidades INT )
+	  SELECT @p_Activo_Insert_Unidad_Medida = Activo FROM OPENJSON( @JSON_IN) WITH ( Activo BIT )
 
 	  --------------------------- DECLARACION DE TABLA PARA INSERTAR LOS REGISTROS DE DIVISAS (TABLA HIJO) ----------------------------------------
 	  DECLARE @p_Tbl_Temp_Divisa TABLE   
@@ -93,7 +93,7 @@ BEGIN
 	  BEGIN TRY	
 	 
 		--ACA SE PONEN LAS VALIDACIONES 
-		 IF EXISTS(SELECT 1 FROM tblUnidadMedida WHERE Nombre = @p_Nombre_Unidad_Medida)        
+		 IF EXISTS(SELECT 1 FROM tblUnidadMedida WHERE Nombre = @p_Nombre_Insert_Unidad_Medida)        
 		 BEGIN   
 				------------------------------ RESPUESTA A LA APP  ------------------------------------
 				SELECT @Resp_1 = 
@@ -118,7 +118,7 @@ BEGIN
 			GOTO FINALIZAR         
 		 END  
 
-		 IF EXISTS(SELECT 1 FROM tblUnidadMedida WHERE Simbolo = @p_Simbolo_Unidad_Medida)        
+		 IF EXISTS(SELECT 1 FROM tblUnidadMedida WHERE Simbolo = @p_Simbolo_Insert_Unidad_Medida)        
 		 BEGIN   
 				------------------------------ RESPUESTA A LA APP  ------------------------------------
 				SELECT @Resp_1 = 
@@ -148,7 +148,7 @@ BEGIN
 								   
 					--INSERTA EN LA TABLA UNIDADES DE MEDIDAS
 					INSERT INTO dbo.[tblUnidadMedida] (			[Nombre],					[Simbolo],			[Cantidad_Unidades],			[Activo],				[Fecha_Creacion] )
-											    VALUES(	@p_Nombre_Unidad_Medida,	@p_Simbolo_Unidad_Medida,	@p_Cantidad_Unidades,		@p_Activo_Unidad_Medida,		GETDATE()    )
+											    VALUES(	@p_Nombre_Insert_Unidad_Medida,	@p_Simbolo_Insert_Unidad_Medida,	@p_Cantidad_Insert_Unidad_Medida,		@p_Activo_Insert_Unidad_Medida,		GETDATE()    )
 
 					SELECT @Id_Unidad_Medida_Insertada = CONVERT(INT, ISNULL(SCOPE_IDENTITY(), -1))
 

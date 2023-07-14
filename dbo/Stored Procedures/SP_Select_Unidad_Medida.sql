@@ -29,6 +29,9 @@ BEGIN
 	  DECLARE @Resp_JSON_Tbl_Tipo_Efectivo NVARCHAR(MAX)
 	  DECLARE @resp_JSON_Consolidada NVARCHAR(MAX)		
 	  DECLARE @ROW NVARCHAR(MAX)
+	  DECLARE @ERROR_NUMBER_SP_Select_Unidad NVARCHAR(MAX) = ERROR_NUMBER()
+      DECLARE @ID_ERROR_Select_Unidad NVARCHAR(MAX) = NULL
+      DECLARE @ROW_ERROR_Select_Unidad NVARCHAR(MAX) = NULL
 
 	  BEGIN TRY	
 	 		
@@ -159,9 +162,9 @@ BEGIN
 							  SELECT	  @@ROWCOUNT												    AS ROWS_AFFECTED
 							, CAST(0 AS BIT)														    AS SUCCESS
 							, CONCAT(ERROR_MESSAGE() ,'Error, al intentar obtener la unidad de medida') AS ERROR_MESSAGE_SP
-							, ERROR_NUMBER()													        AS ERROR_NUMBER_SP
-							, NULL																	    AS ID
-							, NULL																	    AS ROW 
+							, @ERROR_NUMBER_SP_Select_Unidad											AS ERROR_NUMBER_SP
+							, @ID_ERROR_Select_Unidad													AS ID
+							, @ROW_ERROR_Select_Unidad													AS ROW 
 							FOR JSON PATH, INCLUDE_NULL_VALUES
 						)						
 						
@@ -186,9 +189,9 @@ BEGIN
 							  SELECT	  @@ROWCOUNT												    AS ROWS_AFFECTED
 							, CAST(0 AS BIT)														    AS SUCCESS
 							, CONCAT(ERROR_MESSAGE() ,'Error, se resivio el JSON Vacio')                AS ERROR_MESSAGE_SP
-							, ERROR_NUMBER()													        AS ERROR_NUMBER_SP
-							, NULL																	    AS ID
-							, NULL																	    AS ROW 
+							, @ERROR_NUMBER_SP_Select_Unidad											AS ERROR_NUMBER_SP
+							, @ID_ERROR_Select_Unidad													AS ID
+							, @ROW_ERROR_Select_Unidad													AS ROW 
 							FOR JSON PATH, INCLUDE_NULL_VALUES
 						)
 						

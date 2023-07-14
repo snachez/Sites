@@ -52,7 +52,7 @@ BEGIN
 		) 
 
 	  --------------------------- DECLARACION DE TABLA PARA INSERTAR LOS REGISTROS DE PRESENTACIONES HABILITADAS (TABLA HIJO) ----------------------------------------
-	  DECLARE @p_Tbl_Temp_Presentaciones_Habilitadas TABLE   
+	  DECLARE @p_Tbl_Temp_Presentaciones_Habilitadas_Insert TABLE   
 	  (  
 		  ID INT IDENTITY(1,1)
 		 ,Id_Efectivo INT
@@ -60,7 +60,7 @@ BEGIN
 	  )  
 
 	  --INSERTA CADA UNO DE LOS ITEMS DE LA DIVISA
-		INSERT INTO @p_Tbl_Temp_Presentaciones_Habilitadas	 
+		INSERT INTO @p_Tbl_Temp_Presentaciones_Habilitadas_Insert	 
 		SELECT 
 			   Id
 			  ,Nombre		  
@@ -191,16 +191,16 @@ BEGIN
 						------------------------------ INICIO DEL RECORRIDO Y SETEO DE DATA DE LA TABLA TEMPORAL PRESENTACIONES DEL EFECTIVO  ------------------------------------
 
 						DECLARE @iter INT = 1
-						DECLARE @Conta INT = (SELECT COUNT(1) FROM  @p_Tbl_Temp_Presentaciones_Habilitadas	 )
+						DECLARE @Conta INT = (SELECT COUNT(1) FROM  @p_Tbl_Temp_Presentaciones_Habilitadas_Insert	 )
 
-						IF @Conta > 0 WHILE (@iter <= (SELECT MAX(ID) FROM @p_Tbl_Temp_Presentaciones_Habilitadas	 ))
+						IF @Conta > 0 WHILE (@iter <= (SELECT MAX(ID) FROM @p_Tbl_Temp_Presentaciones_Habilitadas_Insert	 ))
 						BEGIN
 
 							--OBTIENE UN ITEM
 							SELECT 								
 							 @p_Id_Efectivo_Iterador = Id_Efectivo
 							,@p_Nombre_Efectivo_Iterador = Nombre									
-							FROM @p_Tbl_Temp_Presentaciones_Habilitadas 
+							FROM @p_Tbl_Temp_Presentaciones_Habilitadas_Insert 
 							WHERE ID = @iter
 						
 							--INSERTA EN LA TABLA tblUnidadMedida_x_Divisa
@@ -213,7 +213,7 @@ BEGIN
 						--SE CONSOLIDA LOS NOMBRES DE LAS PRESENTACIONES DEL EFECTIVO SELECCIONADOS
 						SELECT @p_Resultados_Nombres_Concatenados =  COALESCE(@p_Resultados_Nombres_Concatenados + ', ', '') +  CONVERT(VARCHAR(MAX), Nombre)
 						FROM tblTipoEfectivo
-						WHERE Id IN ( SELECT Id_Efectivo from @p_Tbl_Temp_Presentaciones_Habilitadas     )
+						WHERE Id IN ( SELECT Id_Efectivo from @p_Tbl_Temp_Presentaciones_Habilitadas_Insert     )
 						ORDER BY Nombre
 
 						UPDATE tblUnidadMedida SET Presentaciones_Habilitadas = @p_Resultados_Nombres_Concatenados WHERE Id = @Id_Unidad_Medida_Insertada

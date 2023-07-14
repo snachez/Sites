@@ -30,7 +30,7 @@ BEGIN
 	  SELECT @p_Activo_Insert_Unidad_Medida = Activo FROM OPENJSON( @JSON_IN) WITH ( Activo BIT )
 
 	  --------------------------- DECLARACION DE TABLA PARA INSERTAR LOS REGISTROS DE DIVISAS (TABLA HIJO) ----------------------------------------
-	  DECLARE @p_Tbl_Temp_Divisa TABLE   
+	  DECLARE @p_Tbl_Temp_Divisa_Insert TABLE   
 	  (  
 		  ID INT IDENTITY(1,1)
 		 ,Id_Divisa INT
@@ -38,7 +38,7 @@ BEGIN
 	  )  
 
 		--INSERTA CADA UNO DE LOS ITEMS DE LA DIVISA
-		INSERT INTO @p_Tbl_Temp_Divisa	 
+		INSERT INTO @p_Tbl_Temp_Divisa_Insert	 
 		SELECT 
 			   Id
 			  ,Nombre		  
@@ -158,16 +158,16 @@ BEGIN
 						------------------------------ INICIO DEL RECORRIDO Y SETEO DE DATA DE LA TABLA TEMPORAL DIVISA  ------------------------------------
 
 						DECLARE @i INT = 1
-						DECLARE @Contador INT = (SELECT COUNT(1) FROM  @p_Tbl_Temp_Divisa)
+						DECLARE @Contador INT = (SELECT COUNT(1) FROM  @p_Tbl_Temp_Divisa_Insert)
 
-						IF @Contador > 0 WHILE (@i <= (SELECT MAX(ID) FROM @p_Tbl_Temp_Divisa))
+						IF @Contador > 0 WHILE (@i <= (SELECT MAX(ID) FROM @p_Tbl_Temp_Divisa_Insert))
 						BEGIN
 
 							--OBTIENE UN ITEM
 							SELECT 								
 							 @p_Id_Divisa_Iterador = Id_Divisa
 							,@p_Nombre_Divisa_Iterador = Nombre									
-							FROM @p_Tbl_Temp_Divisa 
+							FROM @p_Tbl_Temp_Divisa_Insert 
 							WHERE ID = @i
 								
 							--INSERTA EN LA TABLA tblUnidadMedida_x_Divisa
